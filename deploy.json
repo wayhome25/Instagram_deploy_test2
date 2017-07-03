@@ -1,8 +1,8 @@
 {
   "REPO_URL":"https://github.com/wayhome25/Instagram_deploy_test2",
   "PROJECT_NAME":"mysite",
-  "REMOTE_HOST":"insta-practice.tk",
-  "REMOTE_USER":"siwabada1",
+  "REMOTE_HOST":"instagram-practice2.tk",
+  "REMOTE_USER":"siwabada2",
   "STATIC_ROOT":"staticfiles",
   "STATIC_URL":"static",
   "MEDIA_ROOT":"media"
