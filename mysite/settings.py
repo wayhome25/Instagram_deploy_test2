@@ -142,7 +142,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 LOGIN_REDIRECT_URL = '/'
 
-sentry 에러로깅용 세팅
+# sentry 에러로깅용 세팅
 import raven
 
 GIT_ROOT = BASE_DIR
