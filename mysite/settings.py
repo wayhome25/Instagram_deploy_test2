@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'b_4(!id8ro!1645n@ubnbvf1hbu93gaia0^_o%2$#hw-@but!v'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -38,6 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.facebook',
+
     'django_extensions',
     'debug_toolbar',
     'imagekit',
@@ -112,6 +119,17 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+ # allauth 설정추가
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend', #추가
+]
+
+SITE_ID = 1
+SOCIALACCOUNT_EMAIL_VERIFICATION = 'none'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = True
+SOCIALACCOUNT_ADAPTER = 'accounts.my_adapter.MyAdapter'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
