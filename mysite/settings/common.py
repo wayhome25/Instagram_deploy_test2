@@ -11,9 +11,12 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
+from os.path import abspath, dirname, join
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+#__file__ : 문자열로 현재 소스파일의 경로를 나타낸다 (abspath를 통해서 절대경로로 변경)
+# 프로젝트 폴더를 포함한 루트 디렉토리를 BASE_DIR로 설정 (common.py의 위치가 1depth 깊어졌기 때문에 dirname 추가)
+BASE_DIR = dirname(dirname(dirname(abspath(__file__))))
 
 
 # Quick-start development settings - unsuitable for production
@@ -25,7 +28,7 @@ SECRET_KEY = 'b_4(!id8ro!1645n@ubnbvf1hbu93gaia0^_o%2$#hw-@but!v'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -46,7 +49,6 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.facebook',
 
     'django_extensions',
-    'debug_toolbar',
     'imagekit',
     'accounts',
     # 'dojo',
@@ -62,12 +64,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'mysite.urls'
 
-INTERNAL_IPS = ["127.0.0.1"] # NOTE: djanog_debug_toolbar 용 설정 추가
 
 TEMPLATES = [
     {

@@ -127,7 +127,7 @@ def _update_virtualenv():
     if not exists(virtualenv_folder + '/bin/pip'):
         run('cd /home/%s/.virtualenvs && virtualenv %s' % (env.user, PROJECT_NAME))
 
-    run('%s/bin/pip install "-r requirements.txt"' % (
+    run('%s/bin/pip install -r "/home/siwabada2/mysite/mysite/requirements.txt"' % (
         virtualenv_folder
     ))
     #
