@@ -66,7 +66,7 @@ def deploy():
 
 def create_superuser():
     virtualenv_folder = project_folder + '/../.virtualenvs/{}'.format(PROJECT_NAME)
-    run('cd %s && %s/bin/python3 manage.py createsuperuser' % (
+    run('cd %s && %s/bin/python3 manage.py createsuperuser --settings=mysite.settings.prod' % (
         project_folder, virtualenv_folder
     ))
 
@@ -109,13 +109,13 @@ def _get_latest_source():
     run('cd %s && git reset --hard %s' % (project_folder, current_commit))
 
 def _update_settings():
-    settings_path = project_folder + '/{}/settings.py'.format(PROJECT_NAME)
+    settings_path = project_folder + '/{}/settings/prod.py'.format(PROJECT_NAME)
     sed(settings_path, "DEBUG = True", "DEBUG = False")
     sed(settings_path,
         'ALLOWED_HOSTS = .+$',
         'ALLOWED_HOSTS = ["%s"]' % (REMOTE_HOST,)
     )
-    secret_key_file = project_folder + '/{}/secret_key.py'.format(PROJECT_NAME)
+    secret_key_file = project_folder + '/{}/settings/secret_key.py'.format(PROJECT_NAME)
     if not exists(secret_key_file):
         chars = 'abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)'
         key = ''.join(random.SystemRandom().choice(chars) for _ in range(50))
@@ -167,16 +167,16 @@ def _update_virtualenv():
 
 def _update_static_files():
     virtualenv_folder = project_folder + '/../.virtualenvs/{}'.format(PROJECT_NAME)
-    run('cd %s && %s/bin/python3 manage.py collectstatic --noinput' % (
+    run('cd %s && %s/bin/python3 manage.py collectstatic --noinput --settings=mysite.settings.prod' % (
         project_folder, virtualenv_folder
     ))
 
 def _update_database():
     virtualenv_folder = project_folder + '/../.virtualenvs/{}'.format(PROJECT_NAME)
-    run('cd %s && %s/bin/python3 manage.py makemigrations --noinput' % (
+    run('cd %s && %s/bin/python3 manage.py makemigrations --noinput --settings=mysite.settings.prod' % (
         project_folder, virtualenv_folder
     ))
-    run('cd %s && %s/bin/python3 manage.py migrate --noinput' % (
+    run('cd %s && %s/bin/python3 manage.py migrate --noinput --settings=mysite.settings.prod' % (
         project_folder, virtualenv_folder
     ))
 
