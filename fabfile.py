@@ -126,39 +126,44 @@ def _update_virtualenv():
     virtualenv_folder = project_folder + '/../.virtualenvs/mysite'.format(PROJECT_NAME)
     if not exists(virtualenv_folder + '/bin/pip'):
         run('cd /home/%s/.virtualenvs && virtualenv %s' % (env.user, PROJECT_NAME))
-    run('%s/bin/pip install "django<2"' % (
+
+    run('%s/bin/pip install "-r requirements.txt"' % (
         virtualenv_folder
     ))
-
-
-    # 추가
-    run('%s/bin/pip install "django_extensions"' % (
-        virtualenv_folder
-    ))
-
-    run('%s/bin/pip install "django-debug-toolbar"' % (
-        virtualenv_folder
-    ))
-
-    run('%s/bin/pip install "pillow"' % (
-        virtualenv_folder
-    ))
-
-    run('%s/bin/pip install "pilkit"' % (
-        virtualenv_folder
-    ))
-
-    run('%s/bin/pip install "django-imagekit"' % (
-        virtualenv_folder
-    ))
-
-    run('%s/bin/pip install "raven"' % (
-        virtualenv_folder
-    ))
-
-    run('%s/bin/pip install "django-allauth==0.31.0"' % (
-        virtualenv_folder
-    ))
+    #
+    # run('%s/bin/pip install "django<2"' % (
+    #     virtualenv_folder
+    # ))
+    #
+    #
+    # # 추가
+    # run('%s/bin/pip install "django_extensions"' % (
+    #     virtualenv_folder
+    # ))
+    #
+    # run('%s/bin/pip install "django-debug-toolbar"' % (
+    #     virtualenv_folder
+    # ))
+    #
+    # run('%s/bin/pip install "pillow"' % (
+    #     virtualenv_folder
+    # ))
+    #
+    # run('%s/bin/pip install "pilkit"' % (
+    #     virtualenv_folder
+    # ))
+    #
+    # run('%s/bin/pip install "django-imagekit"' % (
+    #     virtualenv_folder
+    # ))
+    #
+    # run('%s/bin/pip install "raven"' % (
+    #     virtualenv_folder
+    # ))
+    #
+    # run('%s/bin/pip install "django-allauth==0.31.0"' % (
+    #     virtualenv_folder
+    # ))
 
 def _update_static_files():
     virtualenv_folder = project_folder + '/../.virtualenvs/{}'.format(PROJECT_NAME)
